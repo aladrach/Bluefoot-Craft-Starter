@@ -1,0 +1,32 @@
+<h4>Visit our Store</h4>
+<ul class="sidebar-info">
+	<li>
+		<i class="fa fa-map-marker"></i> {{globals.streetAddress}}<br>
+		{{globals.city}}, {{globals.state}} {{globals.zipCode}}
+	</li>
+	<li>
+		<i class="fa fa-clock-o"></i> Breitenbach Tasting Hours:<br>
+		{{globals.tastingHours}}
+	</li>
+	<li>
+		<i class="fa fa-envelope-o"></i> <a href="mailto:{{globals.contactEmail}}">Contact Us</a>
+	</li>
+</ul>
+
+<h4>Events</h4>
+{% set events = craft.venti.allEvents().startDate('and', '>= ' ~ now).limit('3').find() %}
+		
+{% for event in events %}
+{% set eventStart = event.startDate | date("mdY") %}
+{% set eventEnd = event.endDate | date("mdY") %}
+	<div class="sidebar-events">
+		<a href="/events/{{event.slug}}/{{event.eid}}"><h4>{{event.title}}</h4></a>
+	   <div class="date-time">
+			<i class="fa fa-calendar"></i> {{event.startDate | date("F j, Y")}}{% if eventStart == eventEnd %}{% else %}
+		    to {{event.endDate | date("F j, Y")}}{% endif %}
+		</div>
+		<div class="date-time">
+			<i class="fa fa-clock-o"></i> {{event.startDate | date("g:i a")}} to {{event.endDate | date("g:i a")}}
+		</div>
+    </div>
+{% endfor %}

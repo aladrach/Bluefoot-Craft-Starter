@@ -1,0 +1,32 @@
+{% set whenNew = (options.craft.saveEntry.whenNew is defined)
+                  ? options.craft.saveEntry.whenNew
+                  : false %}
+{% set whenUpdated = (options.craft.saveEntry.whenUpdated is defined)
+		                 ? options.craft.saveEntry.whenUpdated
+		                 : false %}
+{% set sectionIds = (options.craft.saveEntry.sectionIds is defined)
+		                ? options.craft.saveEntry.sectionIds
+		                : null %}
+
+{{ forms.checkboxField({
+		label: "When the entry is created?"|t,
+		name: "rules[craft][saveEntry][whenNew]",
+		checked: whenNew
+}) }}
+
+{{ forms.checkboxField({
+		label: "When the entry is updated?"|t,
+		name: "rules[craft][saveEntry][whenUpdated]",
+		checked: whenUpdated
+}) }}
+
+{{ forms.field({
+		label: "Sections"|t,
+		instructions: "Select sections or leave unchecked for all sections."|t,
+		errors: errors is defined ? errors : null,
+	},
+	forms.checkboxGroup({
+		name: "rules[craft][saveEntry][sectionIds]",
+		options : availableSections,
+		values: sectionIds
+})) }}

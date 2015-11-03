@@ -1,0 +1,31 @@
+{% for entry in craft.entries.section('blog') -%}
+	<div class="blog-post">
+	{% if entry.blogFeaturedImage.first.url is defined -%}
+		<img alt="{{entry.title}}" src="{{entry.blogFeaturedImage.first.url}}">
+	{% endif -%}
+		<i class="fa fa-user"></i> <span class="post-author">{{entry.author.fullName}}</span> <i class="fa fa-calendar"></i> <span class="post-date">{{entry.postDate|date("M. d, Y")}}</span>  <i class="fa fa-comments"></i> <a data-disqus-identifier="blog-{{ entry.id }}" href="{{entry.url}}" class="post-comments">Comments</a>
+		<h3>{{entry.title}}</h3>
+		{% if entry.postExcerpt != "" -%}
+			<p>{{entry.postExcerpt}}</p>
+		{% else -%}
+			{% set paragraphs = entry.body|split('</p>') %}
+	        {% set first_paragraph = paragraphs|first ~ '</p>' %}
+	        {{ first_paragraph | raw }}
+		{% endif -%}
+		<a href="{{entry.url}}" class="button">Read more</a>
+
+		<script type="text/javascript">
+		    /* * * CONFIGURATION VARIABLES * * */
+		    var disqus_identifier = 'blog-{{ entry.id }}';
+		    var disqus_shortname = 'bluefootweb';
+		    
+		    /* * * DON'T EDIT BELOW THIS LINE * * */
+		    (function () {
+		        var s = document.createElement('script'); s.async = true;
+		        s.type = 'text/javascript';
+		        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+		        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		    }());
+		</script>
+	</div>
+{% endfor -%}

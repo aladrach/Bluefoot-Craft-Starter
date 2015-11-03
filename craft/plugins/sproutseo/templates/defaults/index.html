@@ -1,0 +1,108 @@
+{% extends "sproutseo/_layouts/base" %}
+{% import "_includes/forms" as forms %}
+
+{% set title = "Defaults"|t %}
+
+{% set tabs = {
+	defaults: {
+		label: "Defaults"|t,
+		url: cpUrl('sproutseo/defaults')
+	},
+	sitemap: {
+		label: "Sitemap"|t,
+		url: cpUrl('sproutseo/sitemap'),
+	},
+	redirect: {
+		label: "Redirects"|t,
+		url: cpUrl('sproutseo/redirects'),
+	}
+} %}
+
+{% set defaults = craft.sproutSeo.getDefaults %}
+
+{% block main %}
+
+<style>
+.included-fields {
+	color: #999;
+}
+</style>
+
+<div class="grid first">
+	<div class="item">
+		<div class="pane">
+
+			{% if tabs is defined and tabs %}
+				{% include "_includes/tabs" %}
+			{% endif %}
+
+			{% if defaults is empty %}
+
+				<h3>{{ "Create your first meta-data default."|t }}</h3>
+
+			{% else %}
+
+				<table class="data" id="defaults">
+					<thead>
+						<th width="15%">{{ "Name"|t }}</th>
+						<th width="15%">{{ "Handle"|t }}</th>
+						<th width="70%"></th>
+						<td class="thin"></td>
+					</thead>
+
+					{% for default in defaults %}
+
+					<tr id="results" data-id="{{ default.id }}" data-name="{{ default.name|t }}">
+						<td>
+							<a href="{{ url('sproutseo/defaults/' ~ default.id) }}">
+								{% if default.globalFallback %}
+								<span data-icon="home" title="{{ "Homepage"|t }}"></span>
+								{% endif %}
+
+								<strong>{{ default.name }}</strong>
+							</a>
+						</td>
+						<td><code>{{ default.handle }}</code></td>
+						<td class="included-fields">
+
+						</td>
+						<td class="thin">
+							<a class="delete icon" title="{{ 'Delete'|t }}"></a>
+						</td>
+					</tr>
+
+					{% endfor %}
+
+				</table>
+
+			{% endif %}
+
+			<div class="buttons">
+				<a class="btn submit add icon" href="{{ url('sproutseo/defaults/new') }}">{{ "New Default"|t }}</a>
+			</div>
+
+			{% include 'sproutseo/_partials/brand/footer' %}
+
+		</div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% set js %}
+	new Craft.AdminTable({
+		tableSelector: '#defaults',
+		deleteAction: 'sproutSeo/defaults/deleteDefaults',
+		onDeleteObject: function(id)
+		{
+			if($('#defaults').find('tbody').find('tr').size() == 0)
+			{
+				$('#defaults').show();
+				$('#defaults').find('tbody').html('<tr id="no-sproutseo-results"><td colspan="4">{{ "No results found."|t
+		}}</td></tr>');
+			}
+		}
+	});
+
+{% endset %}
+{% includeJs js %}

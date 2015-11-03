@@ -1,0 +1,41 @@
+{% set currentMonth = craft.request.getParam('m') ? craft.request.getParam('m') : "now"|date('n') %}
+		{% set currentYear = craft.request.getParam('y') ? craft.request.getParam('y') : "now"|date('Y') %}
+		{% set cur = currentYear  ~ "-" ~ currentMonth ~ "-1" %}
+		{% set prevMonth = cur|date_modify("last day of last month")|date('U') %}
+		{% set nextMonth = cur|date_modify("first day of next month")|date('U') %}
+		{% set events = craft.venti.allEvents().startDate('and', '>= ' ~ prevMonth, '<= ' ~ nextMonth).find() %}
+		{% set cal = craft.venti.getCal(events,currentMonth,currentYear) %}
+		<div class="row">
+			<div class="medium-10 columns">
+				<h3 class="calendar-title">{{cur|date('F')}} <span>{{cur|date('Y')}}</span></h3>
+			</div>
+			<div class="medium-2 columns cal-nav">
+				<a class="prev" href="?m={{ prevMonth|date('n') }}&y={{ prevMonth|date('Y') }}"><i class="fa fa-angle-left"></i></a>
+				<a class="next" href="?m={{ nextMonth|date('n') }}&y={{ nextMonth|date('Y') }}"><i class="fa fa-angle-right"></i></a>
+			</div>
+		</div>
+		
+		<div class="calendar">
+			<div class="calendar-container">
+			  {{ cal|raw }}
+		  </div>
+		  {% if cal == "" %}
+			No events in {{cur|date('F')}}.
+		{% endif %}
+		</div>
+		
+
+
+		{% set events = craft.venti.allEvents().startDate('and', '>= ' ~ prevMonth, '<= ' ~ nextMonth).limit(5).find() %}
+		
+		{% for event in events %}
+		{% set eventStart = event.startDate | date("mdY") %}
+		{% set eventEnd = event.endDate | date("mdY") %}
+			<div class="event-list">
+			<h4>{{event.title}}</h4>
+			    <p>{{event.startDate | date("F j")}}{% if eventStart != eventEnd %}
+			     - {{event.endDate | date("F j")}}{% endif %}</p>
+			    {{event.eventDescription}}
+			    <a class="button" href="/events/{{event.slug}}/{{event.eid}}">View Event Details</a>
+		    </div>
+		{% endfor %}

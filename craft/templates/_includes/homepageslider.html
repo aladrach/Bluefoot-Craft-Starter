@@ -1,0 +1,9 @@
+<div class="homepage-slider">
+	{% for entry in craft.entries.section('homepageSlider') %}
+		{% for block in entry.slides %}
+			<div>
+			    <img src="{{block.image.first.url}}">
+		    </div>
+		{% endfor %}
+	{% endfor %}
+</div>

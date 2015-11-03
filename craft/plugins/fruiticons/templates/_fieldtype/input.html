@@ -1,0 +1,11 @@
+{% import "_includes/forms" as forms %}
+{% set element = element is defined ? element : null %}
+
+<div class="fr-icon">
+	<select class="fr-icon-select" name="{{ name }}" data-placeholder="Select Icon...">
+		<option value="">Select Icon...</option>
+		{% for class, icon in icons %}
+			<option value="{{ class }}"{{ value.class is defined and value.class == class ? ' selected="selected"' : '' }}>{{ icon }}</option> 
+		{% endfor %}
+	</select>
+</div>

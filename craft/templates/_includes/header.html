@@ -1,0 +1,36 @@
+<header>
+    <section class="header-info">
+        <div class="row">
+            <div class="medium-6 columns">
+                <div class="header-info">
+                    <i class="fa fa-phone"></i> {{globals.phoneNumber}}
+                </div>
+            </div>
+            <div class="medium-6 columns">
+                <ul class="social-icons">
+                    {% for block in globals.socialIcons %}
+                        <li>
+                            <a href="{{block.iconLink}}">{{block.icon.icon}}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="navigation">
+        <div class="row">
+            <div class="medium-3 columns">
+                <a class="logo" href="/">
+                    {% if globals.logo.first.url is defined %}<img src="{{globals.logo.first.url}}" alt="{{globals.companyName}}">{% else %}<h1>{{globals.companyName}}</h1>{% endif %}
+                </a>
+            </div>
+            <div class="medium-9 columns main-nav">
+                <div class="row">
+                    <div class="medium-12 columns">
+                        {% include '_includes/main-nav.html' -%}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</header>

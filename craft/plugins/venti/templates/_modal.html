@@ -1,0 +1,200 @@
+{% import "_includes/forms" as forms %}
+<div class='evrp_overlay' data-events-overlay style='display:none;'>
+<div class='evrp_modal' data-modal>
+  <div class='pane first'>
+    <nav id="modtabs" class="tabs">
+      <ul style='text-align:left;'>
+        <li><a id="tab-0" class="tab sel" href="#modtab1" tabindex="0">Repeat</a></li>
+        <li><a id="tab-1" class="tab" href="#modtab2" tabindex="0">Exclude Dates</a></li>
+      </ul>
+    </nav>
+    <div>
+      <div id='modtab1'>
+        <table class="rep">
+          <tbody>
+            <tr>
+              <th>Repeats:</th>
+              <td>
+                <div class='select'>
+                  <select id="er_frequency" title="Repeats Weekly">
+                    <option title="Daily" value="0"> Daily </option>
+                    <option title="Every weekday (Monday to Friday)" value="1"> Every weekday (Monday to Friday) </option>
+                    <option title="Every Monday, Wednesday, and Friday" value="2"> Every Monday, Wednesday, and Friday </option>
+                    <option title="Every Tuesday, and Thursday" value="3"> Every Tuesday, and Thursday </option>
+                    <option title="Weekly" value="4"> Weekly </option>
+                    <option title="Monthly" value="5"> Monthly </option>
+                    <option title="Yearly" value="6"> Yearly </option>
+                  </select>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr id="er_every">
+              <th>Repeat every:</th>
+              <td>
+                <div class='select'>
+                <select id="er_every_select" title="">
+                  <option value="1"> 1 </option>
+                  <option value="2"> 2 </option>
+                  <option value="3"> 3 </option>
+                  <option value="4"> 4 </option>
+                  <option value="5"> 5 </option>
+                  <option value="6"> 6 </option>
+                  <option value="7"> 7 </option>
+                  <option value="8"> 8 </option>
+                  <option value="9"> 9 </option>
+                  <option value="10"> 10 </option>
+                  <option value="11"> 11 </option>
+                  <option value="12"> 12 </option>
+                  <option value="13"> 13 </option>
+                  <option value="14"> 14 </option>
+                  <option value="15"> 15 </option>
+                  <option value="16"> 16 </option>
+                  <option value="17"> 17 </option>
+                  <option value="18"> 18 </option>
+                  <option value="19"> 19 </option>
+                  <option value="20"> 20 </option>
+                  <option value="21"> 21 </option>
+                  <option value="22"> 22 </option>
+                  <option value="23"> 23 </option>
+                  <option value="24"> 24 </option>
+                  <option value="25"> 25 </option>
+                  <option value="26"> 26 </option>
+                  <option value="27"> 27 </option>
+                  <option value="28"> 28 </option>
+                  <option value="29"> 29 </option>
+                  <option value="30"> 30 </option>
+                </select>
+                </div>
+                <label>days</label>
+              </td>
+            </tr>
+            <tr id="er_dow" style='display: none;'>
+              <th>Repeat on:</th>
+              <td >
+                <div>
+                  <span class="er-dow">
+                  <input id="er_dow1" name="SU" title="Sunday" type="checkbox">
+                  <label for="er_dow1" title="Sunday">S</label>
+                  </span>
+                  <span class="er-dow">
+                  <input id="er_dow2" name="MO" title="Monday" type="checkbox">
+                  <label for="er_dow2" title="Monday">M</label>
+                  </span>
+                  <span class="er-dow">
+                  <input id="er_dow3" name="TU" title="Tuesday" type="checkbox">
+                  <label for="er_dow3" title="Tuesday">T</label>
+                  </span>
+                  <span class="er-dow">
+                  <input id="er_dow4" name="WE" title="Wednesday" type="checkbox">
+                  <label for="er_dow4" title="Wednesday">W</label>
+                  </span>
+                  <span class="er-dow">
+                  <input id="er_dow5" name="TH" title="Thursday" type="checkbox">
+                  <label for="er_dow5" title="Thursday">T</label></span>
+                  <span class="er-dow">
+                  <input id="er_dow6" name="FR" title="Friday" type="checkbox">
+                  <label for="er_dow6" title="Friday">F</label>
+                  </span>
+                  <span class="er-dow">
+                  <input id="er_dow7" name="SA" title="Saturday" type="checkbox">
+                  <label for="er_dow7" title="Saturday">S</label>
+                  </span>
+                </div>
+              </td>
+            </tr>
+
+            <tr id='er_repeatby' style='display: none;'>
+              <th>Repeat by:</th>
+              <td>
+                <span class="">
+                  <input id="er_domrepeat" name="repeatby" type="radio" checked="" value='0' title="Repeat by day of the month">
+                  <label for="er_domrepeat" title="Repeat by day of the month">day of the month</label>
+                </span>
+                <span class="">
+                  <input id="er_dowrepeat" name="repeatby" type="radio" value='1' title="Repeat by day of the week">
+                  <label for="er_dowrepeat" title="Repeat by day of the week">day of the week</label>
+                </span>
+              </td>
+            </tr>
+
+            <tr tabindex="0">
+              <th id="er_starts.label">Starts on:</th>
+              <td><input autocomplete="off" class='text nicetext' disabled id="er_starts" size="10"></td>
+            </tr>
+            <tr>
+              <th >Ends:</th>
+              <td class="evrp_ends">
+                <span class="">
+                  <input checked id="er_endsnever" name="endson" title="Ends never" value='0' type="radio">
+                  <label for="er_endsnever" title="Ends never">Never</label>
+                </span>
+                <span class="">
+                  <input id="er_endsafter" name="endson" title="Ends after a number of occurrences" value='1' type="radio">
+                  <label for="er_endsafter" title="Ends after a number of occurrences">After
+                    <input disabled id="er_occurrences" size="3" type='text' title="Occurrences" value="" class='text nicetext'/> occurrences
+                  </label>
+                </span>
+                <span class="">
+                  <input id="er_endson_rdio" name="endson" title="Ends on a specified date" value='2' type="radio">
+                  <label for="er_endson" title="Ends on a specified date">On
+
+                    {{ forms.dateField({
+                        id: 'er_endson',
+                        name: 'er_endson',
+                        size: '10',
+                        title: 'specified date',
+                        autocomplete: 'off',
+                        value: '',
+                        errors:''
+                      }) }}
+
+                  </label>
+                </span>
+              </td>
+            </tr>
+
+            <tr id="er_summary" tabindex="0">
+              <th>Summary:</th>
+              <td class="evrp_summary"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id='modtab2' class='text--left'>
+        {{ forms.dateField({
+            id: 'er_exclude',
+            name: 'er_exclude',
+            size: '10',
+            title: 'exclude date',
+            autocomplete: 'off',
+            value: '',
+            errors:''
+          }) }}
+        <div id='er_adddate' class='btn add icon dashed'></div>
+        <div id='er_exc_elements' class='elements'></div>
+        <script id='er_exc_element' type='text/template'> 
+          <div class="element unselectable removable" data-locale="en_us"  data-editable="0" tabindex="0" style="top: 0px; left: 0px; z-index: 1;">
+            <input type="hidden" name="er_exc[]" value="">
+            <a class="delete icon" title="Remove"></a>
+            <div class="label"><span class="title"></span></div>
+          </div>
+        </script>
+      </div>
+    </div>
+  </div>
+  <div>
+    <table class='btns'>
+      <tbody>
+          <tr>
+            <td >
+              <button id='evrp_done' class='evrp_done btn submit' data-widget-done>DONE</button>
+              <button class='evrp_modal_close btn'>Cancel</button>
+            </td>
+          </tr>
+        </tbody>
+    </table>
+  </div>
+</div>
+</div>

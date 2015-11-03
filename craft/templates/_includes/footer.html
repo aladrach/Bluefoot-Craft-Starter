@@ -1,0 +1,29 @@
+<footer>
+    <section class="footer-info">
+	    <div class="row">
+	        <div class="medium-4 columns">
+	        	<h4>Contact Info</h4>
+	        	<strong>{{globals.companyName}}</strong><br>
+	        	{{globals.streetAddress}}<br>
+	        	{{globals.city}}, {{globals.state}} {{globals.zipCode}}<br>
+	        	<i class="fa fa-phone"></i> {{globals.phoneNumber}}
+	        </div>
+	        <div class="medium-4 columns">
+	        	<h4>Explore {{globals.companyName}}</h4>
+				{{ craft.amNav.getNav("mainMenu", {
+	                    class: 'footer-nav'
+	                }) }}
+	        </div>
+	        <div class="medium-4 columns">
+	        	<h4></h4>
+	        </div>
+	    </div>
+	</section>
+	<section class="copyright">
+		<div class="row">
+			<div class="medium-12 columns">
+				 &copy; {{ "now"|date("Y") }} {{globals.companyName}}. All Rights Reserved. Site designed and built by <a href="http://www.bluefoot.com" target="_blank"><img src="http://www.bluefoot.com/img/bluefoot-logo-copyright.png" alt=""></a>.
+			</div>
+		</div>
+	</section>
+</footer>

@@ -1,0 +1,86 @@
+{% extends "_layouts/default" %}
+{% block content %}
+	{% for row in entry.pageLayout -%}
+		<section class="cf page-builder {% if row.sectionClass != '' %}{{row.sectionClass}}{% endif %} {% if row.centerText == 1 %}dark{% endif %} {% if row.darkBackground == 1 %}dark{% endif %}" style="{% if row.sectionBgColor != '' and row.fullWidthBg == 1 %}background-color: {{row.sectionBgColor}}; {% endif %}{% if row.sectionBgImage.first.url is defined and row.fullWidthBg == 1 %}background-image: url('{% for image in row.sectionBgImage %}{{image.url}}{% endfor %}');{% endif %}">	
+			
+			{% if row.fullWidthContent == 0 -%}
+				<div class="row" style="{% if row.sectionBgColor != '' and row.fullWidthBg == 0 %}background-color: {{row.sectionBgColor}}; {% endif %}{% if row.sectionBgImage.first.url is defined and row.fullWidthBg == 0 %}background-image: url('{% for image in row.sectionBgImage %}{{image.url}}{% endfor %}');{% endif %}">
+			{% endif -%}
+
+			{% if row.showSidebar == 1 -%}
+					<div class="medium-8 columns">
+			{% endif -%}
+			{% for block in row.column -%}
+				<div class="{{block.columnWidth}} columns {{block.type}}">
+				    {% switch block.type -%}
+				
+						{% case "content" %}
+							{{block.content.content|raw}}
+
+						{% case "heading" %}
+							<h2>{{block.heading}}</h2>
+
+						{% case "image" %}
+							<img src="{{block.image.first.url}}">
+						
+						{% case "gallery" %}
+							<ul class="medium-block-grid-4 small-block-grid-2">
+								{% for image in block.gallery %}
+									<li><img src="{{image.url}}"></li>
+								{% endfor %}
+							</ul>
+
+						{% case "video" %}
+							<div class="flex-video widescreen">
+								{{block.videoUrl|videoEmbed}}
+							</div>
+
+						{% case "htmlEmbed" %}
+							{{block.htmlCode|raw}}
+
+						{% case "cafeMenu" %}
+							{% for row in block.cafeItem -%}
+								<div class="menu-items">
+									<div class="item-price">{{ row.itemPrice|currency('USD', true) }}</div>
+									<strong>{{row.itemName}}</strong>
+									<p>{{row.itemDescription}}</p>
+								</div>
+							{% endfor -%}
+
+						{% case "module" %}
+							{% set modulePath %}_includes/{{block.chooseModule|kebab}}{% endset %}
+							{% include ''~modulePath~'' %}
+							
+						{% case "contactForm" %}
+							{{ craft.sproutForms.displayForm(block.formHandle) }}
+
+					{% endswitch -%}
+				</div>
+			{% endfor -%}
+			
+			{% if row.showSidebar == 1 -%}
+				</div>
+				<div class="medium-4 columns">
+					{% include '_includes/sidebar' %}
+				</div>
+
+			{% endif -%}
+
+			{% if row.fullWidthContent == 0 -%}
+				</div>
+			{% endif -%}
+		</section>
+	{% endfor -%}
+{% endblock %}
+{% block footerScripts %}
+	{% if entry.slug == "homepage" %}
+		<script>
+			$('.homepage-slider').slick({
+			  slidesToShow: 1,
+			  slidesToScroll: 1,
+			  autoplay: true,
+			  autoplaySpeed: 3000,
+			});
+		</script>
+	{% endif %}
+{% endblock %}

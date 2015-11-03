@@ -1,0 +1,110 @@
+/* line 7, sass/modal.scss */
+.evrp_overlay {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  z-index: 100000 !important;
+  text-align: center;
+}
+
+/* line 18, sass/modal.scss */
+.evrp_modal {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: -190px;
+  margin-top: -185px;
+  width: 440px;
+  text-align: center;
+  border: 1px solid #e1e1e1;
+  background-color: white;
+  -moz-box-shadow: 0px 0px 5px #dddddd;
+  -webkit-box-shadow: 0px 0px 5px #dddddd;
+  box-shadow: 0px 0px 5px #dddddd;
+}
+/* line 32, sass/modal.scss */
+.evrp_modal h3 {
+  margin: 0px;
+  padding: 15px 20px 10px 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #444444;
+}
+/* line 40, sass/modal.scss */
+.evrp_modal table {
+  display: inline-block;
+  width: 340px;
+}
+/* line 43, sass/modal.scss */
+.evrp_modal table th {
+  width: 100px;
+  padding-right: 10px;
+  padding-bottom: 15px;
+  color: #333333;
+  font-weight: 600;
+  text-align: right;
+}
+/* line 51, sass/modal.scss */
+.evrp_modal table td {
+  padding-bottom: 15px;
+}
+/* line 55, sass/modal.scss */
+.evrp_modal table,
+.evrp_modal select {
+  font-size: 13px;
+}
+/* line 60, sass/modal.scss */
+.evrp_modal .evrp_summary {
+  font-weight: bold;
+}
+/* line 64, sass/modal.scss */
+.evrp_modal .evrp_ends > span {
+  display: block;
+  padding-bottom: 5px;
+}
+/* line 67, sass/modal.scss */
+.evrp_modal .evrp_ends > span input {
+  margin-right: 3px;
+}
+/* line 71, sass/modal.scss */
+.evrp_modal .field {
+  display: inline-block;
+}
+/* line 75, sass/modal.scss */
+.evrp_modal .sep {
+  margin-bottom: 10px;
+  border-bottom: 1px solid #e1e1e1;
+}
+/* line 79, sass/modal.scss */
+.evrp_modal .elements {
+  min-height: 84px;
+  padding: 5px;
+  border: 1px dashed rgba(0, 0, 0, 0.2) !important;
+}
+/* line 84, sass/modal.scss */
+.evrp_modal .text--left {
+  text-align: left;
+}
+/* line 87, sass/modal.scss */
+.evrp_modal #modtab2 {
+  display: none;
+}
+/* line 90, sass/modal.scss */
+.evrp_modal #er_adddate {
+  color: #aaaaaa;
+  transition: color .3s ease-out;
+}
+/* line 94, sass/modal.scss */
+.evrp_modal #er_adddate.ready {
+  color: #111111;
+  transition: color .3s ease-out;
+}
+/* line 98, sass/modal.scss */
+.evrp_modal .btns {
+  width: 100%;
+  padding-left: 24px;
+}

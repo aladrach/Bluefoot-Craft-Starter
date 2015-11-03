@@ -1,0 +1,25 @@
+/**
+ * Icon Select
+ */
+ .selectize-dropdown.fr-icon-select .fr-option-icon {
+	display: inline-block;
+	min-width:50px;
+}
+.selectize-dropdown.fr-icon-select .fr-option-icon i {
+	font-size: 30px;
+	line-height: 40px;
+	margin-left: 6px;
+	color: #333F4D;
+}
+.selectize-dropdown.fr-icon-select .fr-option-details {
+	display:inline-block;
+}
+.selectize-dropdown.fr-icon-select .fr-option-maker,
+.selectize-dropdown.fr-icon-select .fr-option-name {
+	line-height: 18px;
+}
+.selectize-dropdown.fr-icon-select .fr-option-maker {opacity: 0.5;}
+
+.fr-icon {
+	display: none;
+}
